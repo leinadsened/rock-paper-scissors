@@ -16,25 +16,46 @@ function playRound(playerSelection, computerSelection){
         }
     } else if(playerSelection == "paper"){
         switch(computerSelection){
-            case rock:
+            case "rock":
                 return "Player wins!";
-            case paper:
+            case "paper":
                 return "Draw!";
-            case scissors:
+            case "scissors":
                 return "AI wins!";
         }
     } else if(playerSelection == "scissors"){
         switch(computerSelection){
-            case rock:
+            case "rock":
                 return "AI wins!";
-            case paper:
+            case "paper":
                 return "Player wins!";
-            case scissors:
+            case "scissors":
                 return "Draw!";
         }
     } else { return "Problem";}
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    let score = 0;
+    for (let i = 0; i < 5; i++){
+        console.log("Round " + (i + 1) + ": ");
+        let computerSelection = getComputerChoice();
+        let playerSelection = getPlayerChoice();
+        let round = playRound(playerSelection, computerSelection);
+        console.log(round);
+        if (round == "Player wins!"){
+            score++;
+        }
+    }
+    if (score >= 3) {
+        console.log("You showed the computer who is the smarter one!");
+    } else {console.log("Bloody machines are getting smarter everyday!")}
+}
+
+function getPlayerChoice(){
+    let input = prompt("Please choose rock, paper or scissors!");
+    let choice = input.toLowerCase();
+    return choice;
+}
+
+game();
