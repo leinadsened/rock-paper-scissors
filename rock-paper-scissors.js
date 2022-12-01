@@ -44,17 +44,16 @@ function getPlayerChoice(){
     let choice = input.toLowerCase();
     return choice;
 }
+let result = document.getElementById("result");
 let rockButton = document.getElementById("rock");
 rockButton.addEventListener("click", function(){
-     console.log(playRound("rock", getComputerChoice()))
+     result.textContent = playRound("rock", getComputerChoice());
 });
 let paperButton = document.getElementById("paper");
 paperButton.addEventListener("click", function(){
-     console.log(playRound("paper", getComputerChoice()))
+    result.textContent = playRound("paper", getComputerChoice());
 });
 let scissorsButton = document.getElementById("scissors");
 scissorsButton.addEventListener("click", function(){
-     console.log(playRound("scissors", getComputerChoice()))
+    result.textContent = playRound("scissors", getComputerChoice());
 });
-
-game();
