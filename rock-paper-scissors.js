@@ -36,20 +36,7 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game() {
-    let score = 0;
-    for (let i = 0; i < 5; i++){
-        console.log("Round " + (i + 1) + ": ");
-        let computerSelection = getComputerChoice();
-        let playerSelection = getPlayerChoice();
-        let round = playRound(playerSelection, computerSelection);
-        console.log(round);
-        if (round == "Player wins!"){
-            score++;
-        }
-    }
-    if (score >= 3) {
-        console.log("You showed the computer who is the smarter one!");
-    } else {console.log("Bloody machines are getting smarter everyday!")}
+
 }
 
 function getPlayerChoice(){
@@ -57,5 +44,17 @@ function getPlayerChoice(){
     let choice = input.toLowerCase();
     return choice;
 }
+let rockButton = document.getElementById("rock");
+rockButton.addEventListener("click", function(){
+     console.log(playRound("rock", getComputerChoice()))
+});
+let paperButton = document.getElementById("paper");
+paperButton.addEventListener("click", function(){
+     console.log(playRound("paper", getComputerChoice()))
+});
+let scissorsButton = document.getElementById("scissors");
+scissorsButton.addEventListener("click", function(){
+     console.log(playRound("scissors", getComputerChoice()))
+});
 
 game();
