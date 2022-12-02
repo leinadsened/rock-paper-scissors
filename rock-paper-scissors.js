@@ -36,58 +36,60 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    let scoreDiv = document.getElementById("scores");
-    let result = document.getElementById("result");
-    let rockButton = document.getElementById("rock");
-    rockButton.addEventListener("click", function(){
-        let thisRoundsResult = playRound("rock", getComputerChoice());
-        result.textContent = thisRoundsResult;
-        if (thisRoundsResult == "Player wins!"){playerScore++;}
-        else if (thisRoundsResult == "AI wins!") {computerScore++;}
-        if (playerScore >= 5){
-            scoreDiv.textContent = "You have beaten the AI, you must be very smart!"
-        } else if (computerScore >= 5){
-            scoreDiv.textContent = "The computer must have had luck, it won this time."
-        } else {
-            scoreDiv.textContent = "Player: " + playerScore + " Computers score: " + computerScore;
-        }    });
-    let paperButton = document.getElementById("paper");
-    paperButton.addEventListener("click", function(){
-        let thisRoundsResult = playRound("paper", getComputerChoice());
-        result.textContent = thisRoundsResult;
-        if (thisRoundsResult == "Player wins!"){playerScore++;}
-        else if (thisRoundsResult == "AI wins!") {computerScore++;}
-        if (playerScore >= 5){
-            scoreDiv.textContent = "You have beaten the AI, you must be very smart!"
-        } else if (computerScore >= 5){
-            scoreDiv.textContent = "The computer must have had luck, it won this time."
-        } else {
-            scoreDiv.textContent = "Player: " + playerScore + " Computers score: " + computerScore;
-        }    });
-    let scissorsButton = document.getElementById("scissors");
-    scissorsButton.addEventListener("click", function(){
-        let thisRoundsResult = playRound("scissors", getComputerChoice());
-        result.textContent = thisRoundsResult;
-        if (thisRoundsResult == "Player wins!"){playerScore++;}
-        else if (thisRoundsResult == "AI wins!") {computerScore++;}
-        if (playerScore >= 5){
-            scoreDiv.textContent = "You have beaten the AI, you must be very smart!"
-        } else if (computerScore >= 5){
-            scoreDiv.textContent = "The computer must have had luck, it won this time."
-        } else {
-            scoreDiv.textContent = "Player: " + playerScore + " Computers score: " + computerScore;
-        }
-    });
-
+    scoreDiv.textContent = "";
+    restartBtn.style.display = "none";
+    buttons.style.display = "block";
 }
 
-
-function getPlayerChoice(){
-    let input = prompt("Please choose rock, paper or scissors!");
-    let choice = input.toLowerCase();
-    return choice;
+function checkScores(playerScore, computerScore) {
+    if (playerScore >= 5){
+        scoreDiv.textContent = "You have beaten the AI, you must be very smart!";
+        restartGame();
+    } else if (computerScore >= 5){
+        scoreDiv.textContent = "The computer must have had luck, it won this time.";
+        restartGame();
+    } else {
+        scoreDiv.textContent = "Player: " + playerScore + " Computers score: " + computerScore;
+    }
 }
 
+function restartGame(){
+    playerScore = 0;
+    computerScore = 0;
+    result.textContent = "";
+    buttons.style.display = "none";
+    restartBtn.style.display = "block";
+}
+
+let playerScore = 0;
+let computerScore = 0;
+let paperButton = document.getElementById("paper");
+let scissorsButton = document.getElementById("scissors");
+let rockButton = document.getElementById("rock");
+let result = document.getElementById("result");
+let scoreDiv = document.getElementById("scores");
+let buttons = document.getElementById("game-buttons");
+let restartBtn = document.getElementById("restart-button");
+rockButton.addEventListener("click", function(){
+    let thisRoundsResult = playRound("rock", getComputerChoice());
+    result.textContent = thisRoundsResult;
+    if (thisRoundsResult == "Player wins!"){playerScore++;}
+    else if (thisRoundsResult == "AI wins!") {computerScore++;}
+    checkScores(playerScore, computerScore);
+});
+paperButton.addEventListener("click", function(){
+    let thisRoundsResult = playRound("paper", getComputerChoice());
+    result.textContent = thisRoundsResult;
+    if (thisRoundsResult == "Player wins!"){playerScore++;}
+    else if (thisRoundsResult == "AI wins!") {computerScore++;}
+    checkScores(playerScore, computerScore);
+});
+scissorsButton.addEventListener("click", function(){
+    let thisRoundsResult = playRound("scissors", getComputerChoice());
+    result.textContent = thisRoundsResult;
+    if (thisRoundsResult == "Player wins!"){playerScore++;}
+    else if (thisRoundsResult == "AI wins!") {computerScore++;}
+    checkScores(playerScore, computerScore);
+});
+restartBtn.addEventListener("click", game);
 game();
